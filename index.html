@@ -44,7 +44,7 @@
     <script>
         const queryString = window.location.search
         const urlParams = new URLSearchParams(queryString)
-        console.log(queryString)
+        // console.log(queryString)
 
         function keyGen(){
             var form = document.createElement('form')
@@ -55,21 +55,10 @@
         }
 
         function lineAuth(){
-            console.log('hi')
-            const responseType = "code"
-            const client_id = urlParams.get('client_id')
-            const redirect_uri = encodeURI(urlParams.get('redirect_uri'))
-            const state = randomString(12, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
-
-            const targetUrl = `https://access.line.me/oauth2/v2.1/authorize?response_type=${responseType}&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}&scope=profile%20openid%20email`
-            window.location.href = targetUrl 
+            window.location.href = `${window.location.origin}/lineAuthRequest`
         }
 
-        function randomString(length, chars) {
-            var result = '';
-            for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
-            return result;
-        }
+
     </script>
 </body>
 </html>
