@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .line{
+            background-color: #06C753;
+            border: none;
+            border-radius: 4px;
+            overflow: hidden;
+            width: 150px;
+            margin: 0 auto;
+            padding: 2px;
+        }
+
+        .icon{
+            border-right: rgba(0, 0, 0, 0.08);
+        }
+
+        .text{
+            color: #ffffff;
+            font-size: 11px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <!-- <form action="">
+
+    </form> 
+    <button type="submit" onclick="keyGen()">SUBMIT</button>-->
+
+    <!-- custom line login button -->
+    <button class="line" onclick="lineAuth()">
+        <span class="icon">
+            <img src="./image/line_64.png" alt="icon" />
+        </span>
+        <span class="text">登入</span>
+    </button>
+
+    <script>
+        const queryString = window.location.search
+        const urlParams = new URLSearchParams(queryString)
+        console.log(queryString)
+
+        function keyGen(){
+            var form = document.createElement('form')
+            form.setAttribute('action', `${window.location.origin}/login`)
+            form.setAttribute('method', 'post')
+            document.body.append(form)
+            form.submit()
+        }
+
+        function lineAuth(){
+            console.log('hi')
+            const responseType = "code"
+            const client_id = urlParams.get('client_id')
+            const redirect_uri = encodeURI(urlParams.get('redirect_uri'))
+            const state = randomString(12, '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ')
+
+            const targetUrl = `https://access.line.me/oauth2/v2.1/authorize?response_type=${responseType}&client_id=${client_id}&redirect_uri=${redirect_uri}&state=${state}&scope=profile%20openid%20email`
+            window.location.href = targetUrl 
+        }
+
+        function randomString(length, chars) {
+            var result = '';
+            for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+            return result;
+        }
+    </script>
+</body>
+</html>
